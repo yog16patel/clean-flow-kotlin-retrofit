@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        minSdkVersion 27
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation project(':model')
+
+    implementation domainDependencies.kotlin
+    implementation domainDependencies.coroutines
+
+    implementation appDependencies.dagger_lib
+    implementation appDependencies.dagger_android_lib
+    kapt appDependencies.dagger_compiler_lib
+    kapt appDependencies.dagger_android_processor_lib
+
+    implementation domainDependencies.retrofitLib
+    implementation domainDependencies.retrofitLibGsonLib
+    implementation domainDependencies.okhttp3Lib
+
+    testImplementation testDependencies.jUnit
+    testImplementation testDependencies.robolectric
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockk
+    testImplementation testDependencies.coroutinesTest
+    testImplementation testDependencies.coreTesting
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

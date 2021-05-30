@@ -1,0 +1,4 @@
+include ':data'
+include ':model'
+include ':app'
+rootProject.name = "GeetaGyan"
